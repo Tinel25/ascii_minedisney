@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinel25</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: auto;
+    }
+
+    #ascii-display {
+      white-space: pre;
+      text-align: center;
+      display: none;
+      font-size: 8px;       /* ✅ Plus grand pour plus de largeur */
+      line-height: 5px;     /* ✅ Espacement vertical plus généreux */
+      max-width: 100vw;
+      max-height: 100vh;
+      overflow: auto;
+    }
+
+    #start-button {
+      margin-bottom: 20px;
+      padding: 20px 40px;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 24px;
+      z-index: 10;
+    }
+
+    #start-button:hover {
+      background-color: #666;
+    }
+  </style>
+  <script src="ascii_frames.js"></script>
+</head>
+<body>
+  <button id="start-button">▶ Lancer</button>
+  <div id="ascii-display"></div>
+
+  <script>
+    const displayElement = document.getElementById('ascii-display');
+    const audioElement = document.getElementById('background-music');
+    const startButton = document.getElementById('start-button');
+
+    function startDisplay() {
+      displayElement.innerHTML = frames[0]; // Affiche la seule frame
+      displayElement.style.display = 'block';
+      startButton.style.display = 'none';
+
+      audioElement.play().catch(err => {
+        console.warn("Audio bloqué :", err);
+        alert("Active le son pour profiter de l’ambiance !");
+      });
+    }
+
+    startButton.addEventListener('click', startDisplay);
+  </script>
+</body>
+</html>
